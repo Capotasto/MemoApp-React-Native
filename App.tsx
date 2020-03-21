@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import MemoList from './src/components/MemoList';
+import { StyleSheet, View } from 'react-native';
+import MemoListScreen from './src/screens/MemoListScreen';
 import AppBar from './src/components/AppBar';
-import CircleButton from "./src/elements/CircleButton"
+import MemoDetailScreen from './src/screens/MemoDetailScreen';
 
 export default function App() {
+  // let memo = new Memo("講座のアイディア", new Date(), "講座のアイディアです。\nこれは本文です。\nマークダウンも書けるようにします。");
   return (
     <View style={styles.container}>
-    <AppBar/>
-    <MemoList/>
-    <CircleButton text={"+"} />
+      <AppBar />
+      <MemoDetailScreen/>
     </View>
   );
 }
