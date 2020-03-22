@@ -9,7 +9,11 @@ export default class MemoListScreen extends React.Component {
         return (
             <View style={styles.memoListScreen}>
                 <MemoList />
-                <CircleButton icon={"plus"} />
+                <CircleButton
+                    icon={"plus"}
+                    iconColor={"white"}
+                    buttonStyle={styles.memoAddButton}
+                />
             </View>
         )
     };
@@ -22,5 +26,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%'
     },
+
+    memoAddButton: {
+        backgroundColor: "#E31676"
+    }
 
 });

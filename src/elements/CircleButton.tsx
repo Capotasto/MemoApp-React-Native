@@ -1,28 +1,31 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-//import { FontAwesomeIcon } from 'expo-fontawesome';
-//import { faPencilAlt } from '@fortawesome/free-sol/id-svg-icons';
+import { createIconSet } from '@expo/vector-icons';
 
 interface Props { 
     icon: String,
+    iconColor: String,
     buttonStyle?: any;
-    textStyle?: any;
 }
 
-interface State {}
+interface State { }
+
+const glyphMap = {
+    pencil: '\uf303',
+    plus: '\uf067',
+    check:'\uf00c'
+};
+const expoAssetId = require("../../assets/fonts/fa-solid-900.ttf");
+const CustomIcon = createIconSet(glyphMap, 'FontName', expoAssetId);
 
 export default class CircleButton extends React.Component<Props, State> {
     render() {
         return (
             <View style={[styles.circleButton, this.props.buttonStyle]}>
-                {/* <Text style={[styles.circleButtonText, this.props.textStyle]}>
-                    {this.props.text}
-                </Text> */}
-                <FontAwesome.Button style={styles.circleButtonIcon}
+                <CustomIcon
                     name={this.props.icon}
-                    color="#E31676" //#E31676
-                    backgroundColor="clear"
+                    size={24}
+                    color={this.props.iconColor}
                 />
             </View>
         )

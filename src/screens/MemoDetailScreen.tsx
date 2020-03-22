@@ -24,8 +24,8 @@ export default class MemoDetailScreen extends React.Component<Props, State> {
 
                 <CircleButton
                     icon={"pencil"}
+                    iconColor={"#E31676"}
                     buttonStyle={styles.memoEditButton}
-                    textStyle={styles.memoEditButtonText}
                 />
 
                 <View style={styles.memoEditButton} >
