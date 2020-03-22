@@ -8,7 +8,7 @@ export default class MemoListScreen extends React.Component {
     render() {
         return (
             <View style={styles.memoListScreen}>
-                <MemoList />
+                <MemoList/>
                 <CircleButton
                     icon={"plus"}
                     iconColor={"white"}

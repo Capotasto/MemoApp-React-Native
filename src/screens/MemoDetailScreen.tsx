@@ -47,8 +47,7 @@ export default class MemoDetailScreen extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     memoDetailScreen: {
         flex: 1,
-        width: '100%',
-        paddingTop: 78
+        width: '100%'
     },
 
     memoHeader: {
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     },
 
     memoEditButton: {
-        top: 172,
+        top: 94,
         right: 24,
         backgroundColor: "white"
     },
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     },
 
     memoDetail: {
-        padding: 24
+        padding: 36
     } 
 
 });
