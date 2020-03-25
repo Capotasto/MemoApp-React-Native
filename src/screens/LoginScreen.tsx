@@ -1,24 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from 'react-native';
 
-export default class LoginScreen extends React.Component {
-    render() {
-        return (
-            <View style={styles.loginScreen}>
-                <Text style={styles.loginTitle}　>ログイン</Text>
-                <TextInput style={styles.loginTextInput} value="Email"/>
-                <TextInput style={styles.loginTextInput} value="Password" />
-                <TouchableHighlight
-                    style={styles.loginSendButton}
-                    onPress={() => { }}
-                    underlayColor="#C70f66"
-                >
-                    <Text style={styles.loginSendButtonText}>ログインする</Text>
-                </TouchableHighlight>
-            </View>
-        )
-    };
+interface State{
+    email: string;
+    password: string;
 }
+
+const LoginScreen: React.FC<State> = (navigation, state) => (
+    <View style={styles.loginScreen}>
+        <Text style={styles.loginTitle}　>ログイン</Text>
+        <TextInput style={styles.loginTextInput} value={state.email} />
+        <TextInput style={styles.loginTextInput} value={state.password} />
+        <TouchableHighlight
+            style={styles.loginSendButton}
+            onPress={() =>
+                navigation.navigate('Home')
+            }
+            underlayColor="#C70f66"
+        >
+            <Text style={styles.loginSendButtonText}>ログインする</Text>
+        </TouchableHighlight>
+    </View>
+);
 
 const styles = StyleSheet.create({
     loginScreen: {
@@ -61,3 +64,5 @@ const styles = StyleSheet.create({
         fontSize: 18
     }
 });
+
+export default LoginScreen

@@ -3,21 +3,20 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
 
-export default class MemoEditScreen extends React.Component {
-    render() {
-        return (
-            <View style={styles.memoEditScreen}>
-                {/* <MemoList /> */}
-                <TextInput style={styles.memoEdtiTextInput} />
-                <CircleButton
-                    icon={"check"}
-                    iconColor={"white"}
-                    buttonStyle={styles.memoAddButton}
-                />
-            </View>
-        )
-    };
-}
+const MemoEditScreen = ({ navigation }) => (
+    <View style={styles.memoEditScreen}>
+        <TextInput style={styles.memoEdtiTextInput} />
+        <CircleButton
+            icon={"check"}
+            iconColor={"white"}
+            underlayColor={"#9d0f52"}
+            buttonStyle={styles.memoAddButton}
+            onPress={() =>
+                navigation.goBack()
+            }
+        />
+    </View>
+)
 
 const styles = StyleSheet.create({
     memoEditScreen: {
@@ -42,3 +41,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
+export default MemoEditScreen

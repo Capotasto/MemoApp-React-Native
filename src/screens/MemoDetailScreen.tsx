@@ -8,41 +8,38 @@ interface Props {
 
 interface State { }
 
-export default class MemoDetailScreen extends React.Component<Props, State> {
-    render() {
-        return (
-            <View style={styles.memoDetailScreen}>
-                <View style={styles.memoHeader} >
-                    <Text style={styles.memoHeaderTitle}>
-                        講座のアイディア
+const MemoDetailScreen = ({ navigation }) => (
+    <View style={styles.memoDetailScreen}>
+        <View style={styles.memoHeader} >
+            <Text style={styles.memoHeaderTitle}>
+                講座のアイディア
                     </Text>
-                    <Text style={styles.memoHeaderDate}>
-                        {/* {this.props.memo.date.toLocaleString()}  */}
-                        2019/10/10
+            <Text style={styles.memoHeaderDate}>
+                {/* {this.props.memo.date.toLocaleString()}  */}
+                2019/10/10
                     </Text>
-                </View>
+        </View>
 
-                <CircleButton
-                    icon={"pencil"}
-                    iconColor={"#E31676"}
-                    buttonStyle={styles.memoEditButton}
-                />
+        <CircleButton
+            icon={"pencil"}
+            iconColor={"#E31676"}
+            underlayColor={"#eee"}
+            buttonStyle={styles.memoEditButton}
+            onPress={() =>
+                navigation.navigate('MemoEdit')
+            }
+        />
 
-                <View style={styles.memoEditButton} >
-
-                </View>
-
-                <View style={styles.memoDetail} >
-                    <Text>
-                        講座のアイディアです。
-                        これは本文です。
-                        マークダウンも書けるようにします。
+        <View style={styles.memoDetail} >
+            <Text>
+                講座のアイディアです。
+                これは本文です。
+                マークダウンも書けるようにします。
                     </Text>
-                </View>
-            </View>
-        )
-    };
-}
+        </View>
+    </View>
+
+);
 
 const styles = StyleSheet.create({
     memoDetailScreen: {
@@ -84,3 +81,5 @@ const styles = StyleSheet.create({
     } 
 
 });
+
+export default MemoDetailScreen

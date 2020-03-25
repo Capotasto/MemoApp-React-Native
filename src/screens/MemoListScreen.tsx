@@ -4,20 +4,22 @@ import MemoList from '../../src/components/MemoList';
 
 import CircleButton from "../../src/elements/CircleButton"
 
-export default class MemoListScreen extends React.Component {
-    render() {
-        return (
-            <View style={styles.memoListScreen}>
-                <MemoList/>
-                <CircleButton
-                    icon={"plus"}
-                    iconColor={"white"}
-                    buttonStyle={styles.memoAddButton}
-                />
-            </View>
-        )
-    };
-}
+const MemoListScreen = ({ navigation }) => (
+    <View style={styles.memoListScreen}>
+        <MemoList
+            navigation={navigation}
+        />
+        <CircleButton
+            icon={"plus"}
+            iconColor={"white"}
+            underlayColor={"#9d0f52"}
+            buttonStyle={styles.memoAddButton}
+            onPress={() => 
+                navigation.navigate('MemoEdit')
+            }
+        />
+    </View>
+);
 
 const styles = StyleSheet.create({
     memoListScreen: {
@@ -32,3 +34,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
+export default MemoListScreen
