@@ -1,27 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from 'react-native';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 
-interface State{
-    email: string;
+interface State {
+    email: string
     password: string;
 }
 
-const LoginScreen: React.FC<State> = (navigation, state) => (
-    <View style={styles.loginScreen}>
-        <Text style={styles.loginTitle}　>ログイン</Text>
-        <TextInput style={styles.loginTextInput} value={state.email} />
-        <TextInput style={styles.loginTextInput} value={state.password} />
-        <TouchableHighlight
-            style={styles.loginSendButton}
-            onPress={() =>
-                navigation.navigate('Home')
-            }
-            underlayColor="#C70f66"
-        >
-            <Text style={styles.loginSendButtonText}>ログインする</Text>
-        </TouchableHighlight>
-    </View>
-);
+class LoginScreen extends Component<NavigationInjectedProps, State> {
+    constructor(props: Readonly<NavigationInjectedProps>) {
+        super(props);
+        this.state = {
+            email: "",
+            password: ""
+        }
+    }
+
+    hundleSubmit() {
+        //this.navigation.navigate('Home')
+    }
+
+render() {
+    
+    return (
+        <View style={styles.loginScreen}>
+            <Text style={styles.loginTitle}　>ログイン</Text>
+            <TextInput
+                style={styles.loginTextInput}
+                value={this.state.email}
+                onChangeText={
+                    (text) => {
+                        this.setState({
+                            email: text
+                        })
+                    }
+                }
+                placeholder="Email"
+                autoCapitalize="none"
+                autoCorrect={false}
+            />
+            <TextInput
+                style={styles.loginTextInput}
+                value={this.state.password}
+                onChangeText={
+                    (text) => {
+                        this.setState({
+                            password: text
+                         }) 
+                    }
+                }
+                placeholder="Password"
+                autoCorrect={false}
+                secureTextEntry
+            />
+            <TouchableHighlight
+                style={styles.loginSendButton}
+                onPress={
+                    this.hundleSubmit
+                }
+                underlayColor="#C70f66"
+            >
+                <Text style={styles.loginSendButtonText}>ログインする</Text>
+            </TouchableHighlight>
+        </View>
+    )
+}
+}
+
+
 
 const styles = StyleSheet.create({
     loginScreen: {
@@ -65,4 +111,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginScreen
+export default withNavigation(LoginScreen)

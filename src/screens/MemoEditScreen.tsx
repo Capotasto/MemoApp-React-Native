@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
+import { NavigationInjectedProps, withNavigation } from 'react-navigation';
+
 
 const MemoEditScreen = ({ navigation }) => (
     <View style={styles.memoEditScreen}>
