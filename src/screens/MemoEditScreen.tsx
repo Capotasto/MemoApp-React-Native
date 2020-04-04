@@ -4,7 +4,6 @@ import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
 import { NavigationInjectedProps, withNavigation } from 'react-navigation';
 
-
 const MemoEditScreen = ({ navigation }) => (
     <View style={styles.memoEditScreen}>
         <TextInput style={styles.memoEdtiTextInput} />

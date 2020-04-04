@@ -1,12 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import {
-    NavigationParams,
-    NavigationScreenProp,
-    NavigationState,
-} from 'react-navigation';
-import CircleButton from '../elements/CircleButton';
 
 const MemoList = ({ navigation }) => (
     <View style={styles.memoList}>

@@ -22,32 +22,31 @@ export default class LoginScreen extends Component<NavigationInjectedProps, Stat
     constructor(props: Readonly<NavigationInjectedProps>) {
         super(props);
         this.state = {
-            email: "",
-            password: ""
+            email: "test@test.com",
+            password: "testtest"
         }
     }
 
     onClickLogin = (argArray: string[]) => {
         console.log("onPressed Sign up");
-        console.log(`email: ${argArray[0]}`);
-        console.log(`password: ${argArray[1]}`); 
+        console.log(`email: ${this.state.email}`);
+        console.log(`password: ${this.state.password}`);
 
         firebase.auth().signInWithEmailAndPassword(
-            argArray[0],
-            argArray[1],
+            this.state.email,
+            this.state.password
         )
-            .then((user) => { 
+            .then((user) => {
                 console.log("Success Sign up!", user)
-                this.props.navigation.navigate('Home')
-            })    
-            .catch(function (error) {
+                this.props.navigation.navigate('Home', { currenUser: user.user })
+            }).catch(function (error) {
                 // Handle Errors here.
                 console.log(error)
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-        });
-        
+            });
+
     }
 
     render() {

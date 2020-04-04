@@ -25,8 +25,10 @@ const MemoDetailScreen = ({ navigation }) => (
             iconColor={"#E31676"}
             underlayColor={"#eee"}
             buttonStyle={styles.memoEditButton}
-            onPress={() =>
-                navigation.navigate('MemoEdit')
+            onPress={() => { 
+                console.log("MemoCreate");
+                navigation.navigate('MemoCreate')
+                }
             }
         />
 
