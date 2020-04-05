@@ -1,45 +1,46 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import {
+    NavigationParams,
+    NavigationScreenProp,
+    NavigationState,
+    NavigationInjectedProps
+} from 'react-navigation';
+import firebase from 'firebase';
+import Memo from '../models/Memo';
 
-const MemoList = ({ navigation }) => (
-    <View style={styles.memoList}>
-        <TouchableHighlight onPress={() => navigation.navigate('MemoDetail')}>
-            <View style={styles.memoListItem}>
-                <Text style={styles.memoTitle}>講座のアイディア</Text>
-                <Text style={styles.memoDate}>2017/10/10</Text>
-            </View>
-        </TouchableHighlight>
+interface Prop {
+    memoList: Memo[];
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
 
-        <TouchableHighlight onPress={() => navigation.navigate('MemoDetail')}>
-            <View style={styles.memoListItem}>
-                <Text style={styles.memoTitle}>講座のアイディア</Text>
-                <Text style={styles.memoDate}>2017/10/10</Text>
-            </View>
-        </TouchableHighlight>
+export default class MemoList extends React.Component<Prop>{
+    componentDidMount() {
+        console.log(`memoList:  ${this.props.memoList}`)
+    }
 
-        <TouchableHighlight onPress={() => navigation.navigate('MemoDetail')}>
+    renderItem = ({ item }: { item: Memo}) => (
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('MemoDetail')}>
             <View style={styles.memoListItem}>
-                <Text style={styles.memoTitle}>講座のアイディア</Text>
-                <Text style={styles.memoDate}>2017/10/10</Text>
+                <Text style={styles.memoTitle}>{item.title}</Text>
+                <Text style={styles.memoDate}>{item.date.toLocaleString()}</Text>
             </View>
-        </TouchableHighlight>
+        </TouchableHighlight > 
+    )
 
-        <TouchableHighlight onPress={() => navigation.navigate('MemoDetail')}>
-            <View style={styles.memoListItem}>
-                <Text style={styles.memoTitle}>講座のアイディア</Text>
-                <Text style={styles.memoDate}>2017/10/10</Text>
-            </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => navigation.navigate('MemoDetail')}>
-            <View style={styles.memoListItem}>
-                <Text style={styles.memoTitle}>講座のアイディア</Text>
-                <Text style={styles.memoDate}>2017/10/10</Text>
-            </View>
-        </TouchableHighlight>
-    </View>
-);
+    render() {
+        return (
+            <View style={styles.memoList} >
+                <FlatList<Memo>
+                    data={this.props.memoList}
+                    renderItem={this.renderItem}
+                    keyExtractor={item => item.key}
+                />
+            </View >
+        )
+    }
+}
 
 const styles = StyleSheet.create({
     memoList: {
@@ -66,5 +67,3 @@ const styles = StyleSheet.create({
     }
 
 });
-
-export default MemoList;

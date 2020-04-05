@@ -1,9 +1,11 @@
-class Memo { 
-    title: String
+export default class Memo {
+    key: string
+    title: string
     date: Date
-    body: String
+    body: string
 
-    constructor(title: String, date: Date, body: String) { 
+    constructor(key: string, title: string, date: Date, body: string) { 
+        this.key = key;
         this.title = title;
         this.date = date;
         this.body = body;

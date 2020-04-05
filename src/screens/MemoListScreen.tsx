@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MemoList from '../../src/components/MemoList';
-import CircleButton from "../../src/elements/CircleButton"
+import CircleButton from "../../src/elements/CircleButton";
+import Memo from '../models/Memo';
 
 import {
     NavigationParams,
@@ -15,14 +16,21 @@ interface Prop {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class MemoListScreen extends React.Component<NavigationInjectedProps>{
+interface State { 
+    memoList: Memo[] 
+}
+
+export default class MemoListScreen extends React.Component<NavigationInjectedProps, State>{
     user: firebase.User
-    memoList: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
 
     constructor(props: Readonly<NavigationInjectedProps>) {
         super(props);
         this.user = this.props.navigation.getParam('currenUser', '') as firebase.User
         console.log(this.user)
+
+        this.state = {
+            memoList: [] 
+        }
     }
 
     componentDidMount() {
@@ -35,10 +43,19 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
         db.collection(`users/${this.user.uid}/memos`)
             .get()
             .then((querySnapshot) => {
-                this.memoList = querySnapshot
-                // querySnapshot.forEach((doc) => { 
-                //     console.log(doc.id, " => ", doc.data());
-                // })
+                const tempList: Memo[] = []
+                querySnapshot.forEach((doc) => { 
+                    console.log(`doc.get("cratedAt"): ${doc.get("cratedAt").toDate()}`)
+                    const memo = new Memo(
+                        doc.id,
+                        doc.get("title"),
+                        doc.get("cratedAt").toDate(),
+                        doc.get("body"))
+                    tempList.push(memo)
+                })
+                this.setState({
+                    memoList: tempList
+                })
             }).catch((error) => {
                 console.log(error)
             })
@@ -66,6 +83,7 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
         return (
             <View style={styles.memoListScreen}>
                 <MemoList
+                    memoList={this.state.memoList}
                     navigation={this.props.navigation}
                 />
                 <CircleButton
