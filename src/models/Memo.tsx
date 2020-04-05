@@ -10,4 +10,8 @@ export default class Memo {
         this.date = date;
         this.body = body;
     }
+
+    toString(): string {
+        return JSON.stringify(this)
+    }
 }

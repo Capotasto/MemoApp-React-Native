@@ -21,7 +21,9 @@ export default class MemoList extends React.Component<Prop>{
     }
 
     renderItem = ({ item }: { item: Memo}) => (
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('MemoDetail')}>
+        <TouchableHighlight onPress={() =>
+            this.props.navigation.navigate('MemoDetail', {memo: item})
+        }>
             <View style={styles.memoListItem}>
                 <Text style={styles.memoTitle}>{item.title}</Text>
                 <Text style={styles.memoDate}>{item.date.toLocaleString()}</Text>
