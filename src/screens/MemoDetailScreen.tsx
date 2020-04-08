@@ -10,19 +10,26 @@ import {
 import firebase from 'firebase';
 import Memo from '../models/Memo';
 
-interface Props {
-    // memo: Memo,
-}
+interface Props {　}
 
-interface State { }
+interface State {
+    memo: Memo
+ }
 
 export default class MemoDetailScreen extends React.Component<NavigationInjectedProps, State>{ 
-    
-    memo: Memo
-
     constructor(props: Readonly<NavigationInjectedProps>) {
         super(props);
-        this.memo = this.props.navigation.getParam('memo', '') as Memo
+        const memo = this.props.navigation.getParam('memo', '') as Memo
+        this.state = {
+            memo: memo
+        }
+    }
+
+    updateMemo(memo: Memo) {
+        console.log("updateMemo")
+        this.setState({
+            memo: memo
+        })
     }
 
     render() {
@@ -30,10 +37,10 @@ export default class MemoDetailScreen extends React.Component<NavigationInjected
             <View style={styles.memoDetailScreen}>
                 <View style={styles.memoHeader} >
                     <Text style={styles.memoHeaderTitle}>
-                        {this.memo.title}
+                        {this.state.memo.title}
                     </Text>
                     <Text style={styles.memoHeaderDate}>
-                        {this.memo.date.toLocaleDateString()}
+                        {this.state.memo.date.toLocaleDateString()}
                     </Text>
                 </View>
 
@@ -44,14 +51,20 @@ export default class MemoDetailScreen extends React.Component<NavigationInjected
                     buttonStyle={styles.memoEditButton}
                     onPress={() => {
                         console.log("MemoEdit");
-                        this.props.navigation.navigate('MemoEdit', {memo: this.memo})
+                        this.props.navigation.navigate(
+                                'MemoEdit',
+                            {
+                                memo: this.state.memo,
+                                updateMemo: this.updateMemo.bind(this)
+                            }
+                            )
                         }
                     }
                 />
 
                 <View style={styles.memoDetail} >
                     <Text>
-                        {this.memo.body}
+                        {this.state.memo.body}
                     </Text>
                 </View>
             </View>

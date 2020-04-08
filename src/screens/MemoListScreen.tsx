@@ -41,10 +41,9 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
         }
 
         db.collection(`users/${this.user.uid}/memos`)
-            .get()
-            .then((querySnapshot) => {
+            .onSnapshot((snapshot) => { 
                 const tempList: Memo[] = []
-                querySnapshot.forEach((doc) => { 
+                snapshot.forEach((doc) => {
                     console.log(`doc.get("cratedAt"): ${doc.get("cratedAt").toDate()}`)
                     const memo = new Memo(
                         doc.id,
@@ -56,8 +55,8 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
                 this.setState({
                     memoList: tempList
                 })
-            }).catch((error) => {
-                console.log(error)
+            }, (error) => {
+                    console.log(error) 
             })
     }
 

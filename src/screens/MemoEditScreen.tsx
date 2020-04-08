@@ -11,6 +11,7 @@ interface Props {
 
 interface State {
     memo: Memo
+    updateMemo: any
  }
 
 export default class MemoEditScreen extends React.Component<NavigationInjectedProps, State>{
@@ -18,9 +19,10 @@ export default class MemoEditScreen extends React.Component<NavigationInjectedPr
     constructor(props: Readonly<NavigationInjectedProps>) {
         super(props);
         const memo = this.props.navigation.getParam('memo', '') as Memo
-        //console.log(`memo: ${memo.toString()}`)
+        const updateMemo = this.props.navigation.getParam('', null)
         this.state = {
-            memo: memo
+            memo: memo,
+            updateMemo: updateMemo
         }
     }
 
@@ -43,6 +45,7 @@ export default class MemoEditScreen extends React.Component<NavigationInjectedPr
             })
             .then(() => {
                 console.log("Updating Successful!") 
+                this.props.navigation.getParam('updateMemo')(this.state.memo)
                 this.props.navigation.goBack()
             }).catch((error) => {
                 console.log(error)
