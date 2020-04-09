@@ -10,7 +10,7 @@ import {
     NavigationState,
     NavigationInjectedProps
 } from 'react-navigation';
-import firebase from 'firebase';
+import firebase, { firestore } from 'firebase';
 
 interface Prop {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -21,34 +21,31 @@ interface State {
 }
 
 export default class MemoListScreen extends React.Component<NavigationInjectedProps, State>{
-    user: firebase.User
 
     constructor(props: Readonly<NavigationInjectedProps>) {
         super(props);
-        this.user = this.props.navigation.getParam('currenUser', '') as firebase.User
-        console.log(this.user)
-
         this.state = {
             memoList: [] 
         }
     }
 
     componentDidMount() {
+        const { currentUser } = firebase.auth()
         const db = firebase.firestore();
-        const uid = this.user.uid
+        const uid = currentUser.uid
         if (uid.length == 0) {
             return
         }
 
-        db.collection(`users/${this.user.uid}/memos`)
+        db.collection(`users/${uid}/memos`)
             .onSnapshot((snapshot) => { 
                 const tempList: Memo[] = []
                 snapshot.forEach((doc) => {
-                    console.log(`doc.get("cratedAt"): ${doc.get("cratedAt").toDate()}`)
+                    
                     const memo = new Memo(
                         doc.id,
                         doc.get("title"),
-                        doc.get("cratedAt").toDate(),
+                        doc.get("cratedAt")?.toDate() ?? new Date(),
                         doc.get("body"))
                     tempList.push(memo)
                 })
@@ -58,24 +55,6 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
             }, (error) => {
                     console.log(error) 
             })
-    }
-
-    onClickAddItem() {
-        const db = firebase.firestore();
-        const uid = this.user.uid
-        if (uid.length == 0) {
-            return
-        }
-
-        db.collection(`users/${this.user.uid}/memos`).add({
-            title: "サンプル",
-            cratedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            body: "えええええええええ！！！",
-        }).then((docRef) => {
-            console.log(docRef.id)
-        }).catch((error) => {
-            console.log(error)
-        })
     }
 
     render() {
@@ -91,8 +70,7 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
                     underlayColor={"#9d0f52"}
                     buttonStyle={styles.memoAddButton}
                     onPress={() =>
-                        this.onClickAddItem()
-                        //this.props.navigation.navigate('MemoEdit')
+                        this.props.navigation.navigate('MemoCreate')
                     }
                 />
             </View>

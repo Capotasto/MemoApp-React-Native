@@ -4,7 +4,9 @@ import {
     NavigationParams,
     NavigationScreenProp,
     NavigationState,
-    NavigationInjectedProps
+    NavigationInjectedProps,
+    StackActions,
+    NavigationActions
 } from 'react-navigation';
 import firebase from 'firebase';
 
@@ -36,7 +38,11 @@ export default class SignUpScreen extends React.Component<NavigationInjectedProp
         )
             .then((user) => { 
                 console.log("Success Sign up!", user)
-                this.props.navigation.navigate('Home')
+                const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({ routeName: 'Home' })],
+                });
+                this.props.navigation.dispatch(resetAction);
             })
             .catch(function (error) {
                 // Handle Errors here.

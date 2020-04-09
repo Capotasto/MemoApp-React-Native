@@ -6,8 +6,11 @@ import {
     NavigationScreenProp,
     NavigationState,
     NavigationInjectedProps,
-    withNavigation
+    withNavigation,
+    StackActions,
+    NavigationActions
 } from 'react-navigation';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface Prop {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -38,7 +41,11 @@ export default class LoginScreen extends Component<NavigationInjectedProps, Stat
         )
             .then((user) => {
                 console.log("Success Sign up!", user)
-                this.props.navigation.navigate('Home', { currenUser: user.user })
+                const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({ routeName: 'Home' })],
+                });
+                this.props.navigation.dispatch(resetAction);
             }).catch(function (error) {
                 // Handle Errors here.
                 console.log(error)
@@ -46,7 +53,6 @@ export default class LoginScreen extends Component<NavigationInjectedProps, Stat
                 var errorMessage = error.message;
                 // ...
             });
-
     }
 
     render() {
@@ -90,6 +96,17 @@ export default class LoginScreen extends Component<NavigationInjectedProps, Stat
                 >
                     <Text style={styles.loginSendButtonText}>ログインする</Text>
                 </TouchableHighlight>
+
+                <TouchableOpacity
+                    style={styles.loginSignUp}
+                    onPress={ () =>
+                        this.props.navigation.navigate('SignUp')
+                    }
+                >
+                    <Text style={styles.loginSignUpText}>
+                        メンバー登録する
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -135,5 +152,14 @@ const styles = StyleSheet.create({
     loginSendButtonText: {
         color: "white",
         fontSize: 18
-    }
+    },
+
+    loginSignUp: {
+        marginTop: 24,
+        alignSelf: "center", 
+    },
+
+    loginSignUpText: {
+        fontSize: 18,
+    }    
 });
