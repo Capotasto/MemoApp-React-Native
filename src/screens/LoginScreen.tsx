@@ -25,8 +25,8 @@ export default class LoginScreen extends Component<NavigationInjectedProps, Stat
     constructor(props: Readonly<NavigationInjectedProps>) {
         super(props);
         this.state = {
-            email: "test@test.com",
-            password: "testtest"
+            email: "",
+            password: ""
         }
     }
 

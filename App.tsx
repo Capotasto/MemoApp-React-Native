@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, YellowBox } from 'react-native';
 import MemoListScreen from './src/screens/MemoListScreen';
 import AppBar from './src/components/AppBar';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
@@ -16,6 +16,7 @@ import firebase from 'firebase';
 import ENV from './env.json'
 
 require("firebase/firestore")
+YellowBox.ignoreWarnings(["Setting a timer"]);
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
