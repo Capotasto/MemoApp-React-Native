@@ -1,4 +1,4 @@
-## What is this
+## What is this project
 
 This is an sample memo app that developed by Facebook react native and Expo.
 
@@ -18,9 +18,7 @@ $ npm -v
 $ npm install -g expo-cli
 ```
 
-2. Set up your Google Firebase Console. Follow this official documentation.
-
-https://firebase.google.com/docs/web/setup
+2. Set up your Google Firebase Console. Follow the [official documentation](https://firebase.google.com/docs/web/setup).
 
 3. Create `env.json` from `env.json.sample` and set your credential information to it.
 
@@ -41,5 +39,7 @@ https://firebase.google.com/docs/web/setup
 $ npm install
 
 $ expo r -c
-
 ```
+
+## Reference
+[React Native で iOS / Android アプリ開発をゼロから始めよう！](https://www.udemy.com/course/react-native-ios-android/)
