@@ -10,11 +10,11 @@ You can use this app with your Googel Firebase Account!
 
 |Login|Memo List|
 |---|---|
-|<img src="arts/login.png" >|<img src="arts/memos.png" >|
+|<img src="arts/login.png" width="250px">|<img src="arts/memos.png" width="250px">|
 
 |Detail|Edit|
 |---|---|
-|<img src="arts/detail.png" >|<img src="arts/edit.png" >|
+|<img src="arts/detail.png" width="250px">|<img src="arts/edit.png" width="250px">|
 
 ## Usage
 
