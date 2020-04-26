@@ -1,8 +1,20 @@
-## What is this project
+#
+
+# React Native based sample Momo App with TypeScript and Firebase
 
 This is an sample memo app that developed by Facebook react native and Expo.
 
 You can use this app with your Googel Firebase Account!
+
+## App Screen
+
+|Login|Memo List|
+|---|---|
+|<img src="arts/login.png" >|<img src="arts/memos.png" >|
+
+|Detail|Edit|
+|---|---|
+|<img src="arts/detail.png" >|<img src="arts/edit.png" >|
 
 ## Usage
 
