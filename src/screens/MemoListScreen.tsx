@@ -55,7 +55,7 @@ export default class MemoListScreen extends React.Component<NavigationInjectedPr
                     memoList: tempList
                 })
             }, (error) => {
-                    console.log(error) 
+                    console.log(`error: ${error}`) 
             })
     }
 
